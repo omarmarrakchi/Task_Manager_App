@@ -3,8 +3,8 @@ import axios from "axios";
 import { CheckSquare, Clock, Check, AlertTriangle, Users, TrendingUp } from "lucide-react";
 import StatsCard from "../components/StatsCard";
 
-const TASK_URL = process.env.REACT_APP_TASK_SERVICE_URL || "http://localhost:8000";
-const USER_URL = process.env.REACT_APP_USER_SERVICE_URL || "http://localhost:8001";
+const TASK_URL = import.meta.env.VITE_TASK_SERVICE_URL || "http://localhost:8000";
+const USER_URL = import.meta.env.VITE_USER_SERVICE_URL || "http://localhost:8001";
 
 const PRIORITY_COLORS = {
   CRITICAL: "#B71C1C",

@@ -3,14 +3,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-ARG REACT_APP_TASK_SERVICE_URL=http://localhost:8000
-ARG REACT_APP_USER_SERVICE_URL=http://localhost:8001
+ARG VITE_TASK_SERVICE_URL=http://localhost:8000
+ARG VITE_USER_SERVICE_URL=http://localhost:8001
 
-ENV REACT_APP_TASK_SERVICE_URL=$REACT_APP_TASK_SERVICE_URL
-ENV REACT_APP_USER_SERVICE_URL=$REACT_APP_USER_SERVICE_URL
+ENV VITE_TASK_SERVICE_URL=$VITE_TASK_SERVICE_URL
+ENV VITE_USER_SERVICE_URL=$VITE_USER_SERVICE_URL
 
 COPY package.json ./
-RUN npm install --legacy-peer-deps --force
+RUN npm install
 
 COPY . .
 RUN npm run build
@@ -20,7 +20,6 @@ FROM nginx:alpine
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-# SPA fallback: redirect all routes to index.html
 RUN printf 'server {\n\
     listen 80;\n\
     root /usr/share/nginx/html;\n\

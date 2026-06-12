@@ -5,8 +5,8 @@ import { Plus, Search, LayoutGrid, List, Filter } from "lucide-react";
 import KanbanBoard from "../components/KanbanBoard";
 import TaskModal from "../components/TaskModal";
 
-const TASK_URL = process.env.REACT_APP_TASK_SERVICE_URL || "http://localhost:8000";
-const USER_URL = process.env.REACT_APP_USER_SERVICE_URL || "http://localhost:8001";
+const TASK_URL = import.meta.env.VITE_TASK_SERVICE_URL || "http://localhost:8000";
+const USER_URL = import.meta.env.VITE_USER_SERVICE_URL || "http://localhost:8001";
 
 const PRIORITIES = ["", "LOW", "MEDIUM", "HIGH", "CRITICAL"];
 const STATUSES   = ["", "TODO", "IN_PROGRESS", "DONE"];

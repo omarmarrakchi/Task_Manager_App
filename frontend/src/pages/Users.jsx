@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Plus, X } from "lucide-react";
 import UserCard from "../components/UserCard";
 
-const USER_URL = process.env.REACT_APP_USER_SERVICE_URL || "http://localhost:8001";
+const USER_URL = import.meta.env.VITE_USER_SERVICE_URL || "http://localhost:8001";
 
 const ROLES = ["INTERN", "DEVELOPER", "MANAGER", "LEAD"];
 
