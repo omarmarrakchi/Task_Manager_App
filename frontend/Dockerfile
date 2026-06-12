@@ -3,11 +3,9 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-ARG VITE_TASK_SERVICE_URL=http://localhost:8000
-ARG VITE_USER_SERVICE_URL=http://localhost:8001
-
-ENV VITE_TASK_SERVICE_URL=$VITE_TASK_SERVICE_URL
-ENV VITE_USER_SERVICE_URL=$VITE_USER_SERVICE_URL
+# URLs relatives au build (Nginx proxy par defaut)
+ENV VITE_TASK_SERVICE_URL=/task-api
+ENV VITE_USER_SERVICE_URL=/user-api
 
 COPY package.json ./
 RUN npm install
@@ -19,11 +17,27 @@ RUN npm run build
 FROM nginx:alpine
 
 COPY --from=builder /app/build /usr/share/nginx/html
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
+# Config Nginx : proxy interne + SPA fallback
 RUN printf 'server {\n\
     listen 80;\n\
     root /usr/share/nginx/html;\n\
     index index.html;\n\
+\n\
+    location /task-api/ {\n\
+        proxy_pass http://task-service:8000/;\n\
+        proxy_set_header Host $host;\n\
+        proxy_set_header X-Real-IP $remote_addr;\n\
+    }\n\
+\n\
+    location /user-api/ {\n\
+        proxy_pass http://user-service:8001/;\n\
+        proxy_set_header Host $host;\n\
+        proxy_set_header X-Real-IP $remote_addr;\n\
+    }\n\
+\n\
     location / {\n\
         try_files $uri $uri/ /index.html;\n\
     }\n\
@@ -31,4 +45,4 @@ RUN printf 'server {\n\
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/docker-entrypoint.sh"]
