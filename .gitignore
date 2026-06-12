@@ -1,0 +1,23 @@
+# Dependencies
+frontend/node_modules/
+task-service/venv/
+user-service/venv/
+
+# Environment variables
+.env
+
+# React build output
+frontend/build/
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
