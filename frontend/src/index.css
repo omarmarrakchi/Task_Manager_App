@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F6F6F6;
+  color: #595959;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F6F6F6; }
+::-webkit-scrollbar-thumb { background: #D3D3D3; }
+::-webkit-scrollbar-thumb:hover { background: #595959; }
+
+/* Kanban column scroll */
+.kanban-col {
+  min-height: 200px;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+
+/* Priority badge colors */
+.badge-LOW      { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+.badge-MEDIUM   { background: #FFF9C4; color: #F57F17; border: 1px solid #FFF176; }
+.badge-HIGH     { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+.badge-CRITICAL { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+
+/* Status badge */
+.badge-TODO        { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+.badge-IN_PROGRESS { background: #FFF9C4; color: #F57F17; border: 1px solid #FFF176; }
+.badge-DONE        { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+
+/* Role badge */
+.badge-INTERN    { background: #EDE7F6; color: #4527A0; border: 1px solid #CE93D8; }
+.badge-DEVELOPER { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+.badge-MANAGER   { background: #FFF9C4; color: #F57F17; border: 1px solid #FFF176; }
+.badge-LEAD      { background: #FFE600; color: #1A1A1A; border: 1px solid #D4C000; }
